@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Task 8</title>
+    <style>
+        body
+        {
+            margin: 0;
+        }
+    
+        button, input {
+            margin-right: -4.5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="table">
+    </div>
+    <button onclick="add_element()" style="display: block">Добавить элемент</button>
+    <button onclick="to_json()">Сохранить</button>
+
+    <div id="json"></div>
+</body>
+</html>
+
+<script>
+    const template =
+        `<div class="row">
+        <input type="text">
+        <input type="text">
+        <button onclick="up(this)">&#8593;</button>
+        <button onclick="down(this)">&#8595;</button>
+        <button onclick="this.parentNode.remove()">&#215;</button>
+        </div>`;
+    add_element();
+
+    function add_element() {
+        document.getElementById('table').insertAdjacentHTML('beforeend', template)
+    }
+
+    function to_json() {
+        var items = document.getElementById('table').children;
+        
+        var result = '{';
+        for (var i = 0; i < items.length; i++)
+        {
+            const item = items[i].children;
+            if (i > 0) {
+                result += ',';
+            }
+            const key = item[0].value;
+            const value = item[1].value;
+            result += '"' + key + '":"' + value + '"';
+        }
+        result += '}';
+        
+        document.getElementById('json').innerHTML = result;
+    }
+
+
+    function up(row) {
+        var rows = document.getElementById('table');
+        if (row.parentNode !== rows.firstElementChild) {
+            rows.insertBefore(row.parentNode, row.parentNode.previousElementSibling);
+        }
+    }
+
+
+    function down(row) {
+        var rows = document.getElementById('table');
+        if (row.parentNode !== rows.lastElementChild) {
+            rows.insertBefore(row.parentNode.nextElementSibling, row.parentNode);
+        }
+    }
+</script>
