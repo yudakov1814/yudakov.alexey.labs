@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 7</title>
+    <style>
+        input {
+            display: block;
+        }
+
+        #figures {
+            margin-top: 8px;
+            border: 2px solid black;
+        }
+    
+        .figure {
+            position: absolute;
+        }
+    
+        .target-square, .target-circle {
+            background-color: yellow !important;
+        }
+    
+        .target-triangle {
+            border-bottom-color: yellow !important;
+        }
+    
+        .square, .circle {
+            border: 1px solid black;
+        }
+
+        .square {
+            background: rgba(255, 0, 0, 0.8);
+        }
+
+        .circle {
+            border-radius: 50%;
+            background: rgba(0, 255, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <input id="in" type="number">
+    <button onclick="add_figure('square')">Квадрат</button>
+    <button onclick="add_figure('triangle')">Треугольник</button>
+    <button onclick="add_figure('circle')">Круг</button>
+    <div id="figures"></div>
+</body>
+</html>
+
+<script>
+    const max_wight = 1000;
+    const max_height = 600;
+    var figures = document.getElementById('figures');
+    figures.style.width = max_wight + 'px';
+    figures.style.height = max_height + 'px';
+    
+    function add_figure(new_figure_class) {
+        const count = document.getElementById('in').value;
+        for (var i = 0; i < count; i++)
+        {
+            var new_figure = document.createElement('div');
+            new_figure.classList.add(new_figure_class);
+            new_figure.classList.add('figure');
+            
+            const x = Math.random() * (max_wight - 50);
+            const y = Math.random() * (max_height - 50);
+            const size = 50 + (Math.random() * Math.min(x, y, max_wight - x - 50, max_height - y - 50));
+            
+            new_figure.style.marginLeft = x + 'px';
+            new_figure.style.marginTop = y + 'px';
+            
+            if (new_figure.classList.contains('triangle')) {
+                new_figure.style.border = size * 0.5 + 'px' + ' solid transparent';
+                new_figure.style.borderBottom = size * 0.5 + 'px' + ' solid rgba(0, 0, 255, 0.8)';
+            }
+            else {
+                new_figure.style.width = size + 'px';
+                new_figure.style.height = size + 'px';
+            }
+
+            figures.appendChild(new_figure);
+        }
+    }
+
+    figures.addEventListener('click', function (e) {
+        if (e.target.classList.contains('square')) {
+            e.target.classList.add('target-square');
+        }
+        else if (e.target.classList.contains('circle')) {
+            e.target.classList.add('target-circle');
+        }
+        else if (e.target.classList.contains('triangle')) {
+            e.target.classList.add('target-triangle');
+        }
+        else {
+            figures.childNodes.forEach(function (child){
+                child.classList.remove('target-square', 'target-circle', 'target-triangle');
+            });
+        }
+    }, false);
+    
+    figures.addEventListener('dblclick', function (e) {
+        if (e.target.classList.contains('figure')) {
+            e.target.remove();
+        }
+    }, false);
+</script>
