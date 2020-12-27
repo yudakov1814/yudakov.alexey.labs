@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Task 9</title>
+    <style>
+        #calc {
+            border: 5px solid #09f;
+            position: absolute;
+            padding: 1em;
+            padding-top: 80px;
+        }
+
+        .output-wrapper {
+            position: absolute;
+            top: 22px;
+            overflow: hidden;
+            border: 1px solid black;
+            padding: 0 5px;
+            font-size: 3em;
+            width: 335px;
+        }
+
+        #output_black, #output_grey {
+            white-space: nowrap;
+            float: right;
+            margin-top: 2px;
+        }
+
+        #output_grey {
+            color: grey;
+        }
+
+        button {
+            width: 2em;
+            height: 2em;
+            font-size: 2em;
+        }
+
+        button:hover {
+            border-radius: 1px;
+            border: 2px solid #8ad;
+        }
+    </style>
+</head>
+<body>
+    <div id="calc">
+        <table cellspacing="5">
+            <tr>
+                <td colspan="5">
+                    <div class="output-wrapper">
+                        <span id="output_grey">0</span>
+                    </div>
+                    <div class="output-wrapper">
+                        <span id="output_black">0</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><button onclick="add_digit('7')">7</button></td>
+                <td><button onclick="add_digit('8')">8</button></td>
+                <td><button onclick="add_digit('9')">9</button></td>
+                <td><button onclick="add_operation('/')">/</button></td>
+                <td><button onclick="set_empty()">C</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="add_digit('4')">4</button></td>
+                <td><button onclick="add_digit('5')">5</button></td>
+                <td><button onclick="add_digit('6')">6</button></td>
+                <td><button onclick="add_operation('*')">*</button></td>
+                <td><button onclick="cancel()"><-</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="add_digit('1')">1</button></td>
+                <td><button onclick="add_digit('2')">2</button></td>
+                <td><button onclick="add_digit('3')">3</button></td>
+                <td><button onclick="add_operation('-')">-</button></td>
+                <td rowspan="2"><button onclick="solve()" style="height: 135px">=</button></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button onclick="add_digit('0')" style="width: 135px">0</button></td>
+                <td><button onclick="add_dot()">.</button></td>
+                <td><button onclick="add_operation('+')">+</button></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+
+<script>
+    var out_g = document.getElementById('output_grey');
+    var out_b = document.getElementById('output_black');
+    
+    function output_add_char(ch) {
+        out_g.textContent += ch;
+        out_b.textContent += ch;
+    }
+
+    function output_add_node(str) {
+        out_g.textContent += str;
+        out_b.textContent = str;
+    }
+
+    function set_output(s, str) {
+        out_g.textContent = out_g.textContent.slice(0, s) + str;
+        out_b.textContent = out_b.textContent.slice(0, s) + str;
+    }
+
+    function add_operation(op) {
+        var expression = out_g.textContent.split(' ');
+        var last_node = expression[expression.length - 1];
+        
+        if (last_node[0])
+        {
+            output_add_node(' ' + op + ' ');
+        }
+        else
+        {
+            set_output(-2, op + ' ');
+        }
+    }
+
+    function add_digit(digit) {
+        var expression = out_g.textContent.split(' ');
+        var last_node = expression[expression.length - 1];
+        
+        if (last_node.length == 1 && last_node[0] === '0')
+        {
+            set_output(-1, digit)
+        }
+        else if (last_node === '') {
+            output_add_node(digit);
+        }
+        else {
+            output_add_char(digit);
+        }
+    }
+
+    function add_dot() {
+        var expression = out_g.textContent.split(' ');
+        var last_node = expression[expression.length - 1];
+        
+        if (last_node.indexOf('.') == -1)
+        {
+            if (last_node[0])
+            {
+                output_add_char('.');
+            }
+            else
+            {
+                output_add_node('0.');
+            }
+        }
+    }
+
+    function set_empty() {
+        set_output(0, '0');
+    }
+
+    function cancel() {
+        if (out_g.textContent.length > 1)
+        {
+            if (out_g.textContent[out_g.textContent.length - 1] == ' ')
+            {
+                set_output(-3, '');
+            }
+            else
+            {
+                set_output(-1, '');
+            }
+            
+            var expression = out_g.textContent.split(' ');
+            if (out_b.textContent === '') {
+                out_b.textContent = expression[expression.length - 1];
+            }
+
+            if (out_b.textContent === '') {
+                out_b.textContent = expression[expression.length - 2] + ' ';
+            }
+        }
+        else
+        {
+            set_output(0, '0');
+        }
+    }
+
+    function solve() {
+        var expression = out_g.textContent.split(' ');
+        var last_node = expression[expression.length - 1];
+        var result = 0;
+        
+        if (last_node === '') {
+            result = eval(out_g.textContent.slice(0, -3));
+        }
+        else
+        {
+            result = eval(out_g.textContent);
+        }
+
+        if (result != Infinity && result != -Infinity)
+        {
+            set_output(0, (parseInt(result * 10000)) / 10000);
+        }
+        else
+        {
+            set_output(0, result);
+        }
+    }
+</script>
