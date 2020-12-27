@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 5</title>
+    <style>
+        body, h1, h3 {
+            margin: 0;
+        }
+        
+        .container {
+            margin: 0 auto;
+            width: 50em;
+            background-color: aqua;
+            box-shadow: 0 0 1em rgba(0,0,0,0.2);
+        }
+    
+        .news-container {
+            padding: 20px;
+        }
+
+        .news-container:hover {
+            background-color: #f55;
+            transition: 0.2s;
+        }
+    
+        .button-wrapper{
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            background: linear-gradient(#0e0, #070);
+            color: white;
+            box-shadow: 0 0 1em rgba(0,0,0,0.1);
+            padding: 8px;
+            border: 0;
+            border-radius: 0.25em;
+        }
+
+        hr {
+            height: 2px;
+            margin: 0;
+            border: none;
+            color: black;
+            background-color: black;
+        }
+    
+        h1 {
+            text-align: center;
+        }
+
+        .modal {
+            visibility: hidden;
+            background-color: #df6;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30em;
+            padding: 1em;
+        }
+
+
+        #modal-transparent {
+            visibility: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div id="modal-transparent"></div>
+    
+    <div id="news-1" class="modal">
+        <h1>Новость 1</h1>
+        <p>Новость 1: Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet asperiores aut nihil! Corporis debitis labore fugiat id, eligendi ratione veritatis!
+        </br>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam hic, ipsa, ullam, cupiditate eveniet at voluptate corrupti commodi nobis ratione voluptatem! Vel animi totam cupiditate doloribus ad ab exercitationem officia eveniet impedit? Deleniti quasi nisi consectetur perspiciatis quibusdam nostrum, enim perferendis nam, magni molestias recusandae id libero vitae, repudiandae praesentium.</p>
+    </div>
+    
+    <div id="news-2" class="modal">
+        <h1>Новость 2</h1>
+        <p>Новость 1: Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet asperiores aut nihil! Corporis debitis labore fugiat id, eligendi ratione veritatis!
+        </br>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam hic, ipsa, ullam, cupiditate eveniet at voluptate corrupti commodi nobis ratione voluptatem! Vel animi totam cupiditate doloribus ad ab exercitationem officia eveniet impedit? Deleniti quasi nisi consectetur perspiciatis quibusdam nostrum, enim perferendis nam, magni molestias recusandae id libero vitae, repudiandae praesentium.</p>
+    </div>
+    
+    <div id="news-3" class="modal">
+        <h1>Новость 3</h1>
+        <p>Новость 3: Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet asperiores aut nihil! Corporis debitis labore fugiat id, eligendi ratione veritatis!
+        </br>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam hic, ipsa, ullam, cupiditate eveniet at voluptate corrupti commodi nobis ratione voluptatem! Vel animi totam cupiditate doloribus ad ab exercitationem officia eveniet impedit? Deleniti quasi nisi consectetur perspiciatis quibusdam nostrum, enim perferendis nam, magni molestias recusandae id libero vitae, repudiandae praesentium.</p>
+    </div>
+    
+    <div class="container">
+        <div class="news-container">
+            <h3>Новость 1</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet asperiores aut nihil! Corporis     debitis labore fugiat id, eligendi ratione veritatis!</p>
+            <div class="button-wrapper">
+                 <button onclick="open_modal('news-1')">Открыть всплывающее окно</button>
+            </div>
+        </div>
+        <hr>
+        <div class="news-container">
+            <h3>Новость 2</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet asperiores aut nihil! Corporis     debitis labore fugiat id, eligendi ratione veritatis!</p>
+            <div class="button-wrapper">
+                 <button onclick="open_modal('news-2')">Открыть всплывающее окно</button>
+            </div>
+        </div>
+        <hr>
+        <div class="news-container">
+            <h3>Новость 3</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet asperiores aut nihil! Corporis     debitis labore fugiat id, eligendi ratione veritatis!</p>
+            <div class="button-wrapper">
+                 <button onclick="open_modal('news-3')">Открыть всплывающее окно</button>
+            </div>
+        </div>
+    <div>
+</body>
+</html>
+
+<script>
+    var last_modal = '';
+
+    function open_modal(name_modal){
+        last_modal = name_modal;
+        document.getElementById(name_modal).style.visibility = 'visible';
+        document.getElementById('modal-transparent').style.visibility = 'visible';
+    }
+
+    document.getElementById('modal-transparent').addEventListener('click', () => {
+        document.getElementById(last_modal).style.visibility = 'hidden';
+        document.getElementById('modal-transparent').style.visibility = 'hidden';
+    })
+</script>
