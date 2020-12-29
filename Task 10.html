@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Task 10</title>
+    <style>
+        body {
+            margin: 0;  
+        }
+
+        #scena {
+            position: absolute;
+            overflow: hidden;
+            background-color: black;
+            user-select: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        #curtain {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: bottom 0.2s;
+            background-image: url(1.jpg);
+            background-size: auto 100%;
+            background-position: center;
+            bottom: 0%;
+            z-index: 100;
+            display: none;
+        }
+
+        #curtain:hover {
+            bottom: 5%;
+        }
+
+        #lamp {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+            height: 37vh;
+            margin-top: 3vh;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        #light {
+            opacity: 0;
+            transition: opacity 0.2s;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%,0);
+            border: 45vh solid transparent;
+            border-bottom: 80vh solid yellow;
+            top: -35vh;
+            width: 10vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #magic-scena {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+            bottom: 10vh;
+            height: 50vh;
+            width: 80vh;
+            visibility: hidden;
+        }
+
+        #rabbit, #bird, #hat, #witch {
+            position: absolute;
+        }
+
+        #rabbit, #bird {
+            height: 20%;
+            right: 18%;
+            cursor: pointer;
+        }
+
+        #hat {
+            bottom: 5%;
+        }
+
+        #witch {
+            height: 70%;
+            left: 0;
+            bottom: 0;
+        }
+
+        #hat {
+            height: 35%;
+            right: 10%;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="scena">
+        <div id="curtain" onclick="start_magic()"></div>
+
+        <img id="lamp" src="3.png" onclick="switch_light()">
+
+        <div id="magic-scena">
+            <img id="witch" src="2.jpg">
+            <img id="bird" src="4.png" onclick="do_main_magic()">
+            <img id="rabbit" src="5.png" onclick="do_main_magic()">
+            <img id="hat" src="6.png">
+        </div>
+
+        <div id="light"></div>
+    </div>
+</body>
+</html>
+
+<script>
+    function start_magic() {
+        document.getElementById('curtain').style.bottom = '100%';
+        document.getElementById('curtain').style.transition = 'bottom 1s';
+    }
+
+    var light_is_turn_on = false;
+    function switch_light() {
+        if (light_is_turn_on) { 
+            document.getElementById('light').style.opacity = '0';
+            document.getElementById('magic-scena').style.visibility = 'hidden';
+        }
+        else {   
+            document.getElementById('light').style.opacity = '0.5';
+            document.getElementById('magic-scena').style.visibility = 'visible';
+        }
+        light_is_turn_on = !light_is_turn_on;
+    }
+
+    var rabbit = document.getElementById('rabbit');
+    rabbit.style.transition = 'bottom 1s';
+    rabbit.style.bottom = '45%';
+    var bird = document.getElementById('bird');
+    bird.style.transition = 'bottom 0.5s';
+    bird.style.bottom = '5%';
+    function do_main_magic() {
+        [rabbit.style.transition, bird.style.transition] = [bird.style.transition, rabbit.style.transition];
+        [rabbit.style.bottom, bird.style.bottom] = [bird.style.bottom, rabbit.style.bottom];
+    }
+</script>
