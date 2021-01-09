@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en">
     
@@ -10,159 +10,163 @@
             margin: 0;
             background-color: #edeef0;
         }
-        #main-container{
+
+        #main-container {
             padding-top: 4em;
         }
-    
-    #top-section{
-        position: fixed;
-        background-color: #2e5473;
-        width: 100%;
-        padding: 6px 0 0 5em;
-    }
-    
-    #content-wrapper{
-        background-color: #edeef0;
-        float: left;
-        width: 100%;
-    }
-    
-    #content-column{
-        margin: 0 200px 0 400px;
-    }
-    
-    #left-column{
-        float: left;
-        width: 40%;
-        margin-left: -100%;
-    }
-    
-    #right-column{
-        position: fixed;
-        width: 200px;
-        right: 0.5em;
-    }
-    
-    #footer{
-        background-color: white;
-        text-align: center;
-        padding: 8px;
-        color: gray;
-    }
-    
-    .innertube{
-        margin: 10px;
-        margin-top: 0;
-    }
-    
-    .card {
-        background-color: white;
-        border: 1px solid #d0d0d0;
-        border-radius: 10px;
-        padding: 1em;
-        margin-bottom: 1em;
-    }
-    
-    #content-column > .card {
-        max-width: 400px;
-        margin: auto;
-        margin-bottom: 1em;
-    }
-    
-    .info-text {
-        background-color: #edeef0;
-        margin: 0.5em 0;
-    }
-    
-    #nav {
-        float: right;
-        margin-right: 1em;
-    }
-    
-    
-    #nav > a {
-        margin-top: 1em;
-        color: #507299;
-        text-decoration: none;
-        display: block;
-        width: 210px;
-    }
-    
-    .post-footer{
-        padding-bottom: 1em;
-    }
-    
-    hr{
-        border: none;
-        background-color: #d0d0d0;
-    }
-    
-    .like{
-        float: left;
-        text-decoration: none;
-    }
-    
-    .comment{
-        float: right;
-        text-decoration: none;
-    }
-    
-    p::selection {
-        color: green;
-        background-color: #d0d0d0;
-    }
-    
-    @media (max-width: 1000px){
-        #right-column{
-            display: none;
-        }
-        
-        #content-column{
-            margin-right: 0;
-            float: right;
-            width: 500px;
-        }
-    }
-    
-    @media (max-width: 768px){
-        #main-container{
-            display: flex;
-            flex-flow: wrap;
-        }
-        
-        #left-column{
-            order: 0;
-            float: none;
+
+        #top-section {
+            position: fixed;
+            background-color: #2e5473;
             width: 100%;
-            clear: both;
+            padding: 6px 0 0 5em;
+        }
+
+        #content-wrapper {
+            background-color: #edeef0;
+            float: left;
+            width: 100%;
+        }
+
+        #content-column {
+            margin: 0 200px 0 400px;
+        }
+
+        #left-column {
+            float: left;
+            width: 40%;
+            margin-left: -100%;
+        }
+
+        #right-column {
+            position: fixed;
+            width: 200px;
+            right: 0.5em;
+        }
+
+        #footer {
+            background-color: white;
+            text-align: center;
+            padding: 8px;
+            color: gray;
+        }
+
+        .innertube {
+            margin: 10px;
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #d0d0d0;
+            border-radius: 10px;
+            padding: 1em;
+            margin-bottom: 1em;
+        }
+
+        #content-column > .card {
+            max-width: 400px;
             margin: auto;
             margin-bottom: 1em;
         }
-        
-        #content-wrapper{
-            order: 1;
+
+        .info-text {
+            background-color: #edeef0;
+            margin: 0.5em 0;
         }
-        
-        #footer{
-            order: 2;
-            width: 100%;
-        }
-        
-        #content-column{
-            width: 100%;
-        }
-        
+
         #nav {
-            margin: auto;
-            text-align: center;
+            float: right;
         }
-        
-        #nav > a {
-            padding: 0.5em;
-            display: inline-block;
-            width: auto;
+
+
+            #nav > a {
+                padding: 8px;
+                color: #507299;
+                text-decoration: none;
+                display: block;
+                width: 210px;
+            }
+
+                #nav > a:hover {
+                    background-color: #e1e5eb;
+                }
+
+        .post-footer {
+            padding-bottom: 1em;
         }
-    }
+
+        hr {
+            border: none;
+            background-color: #d0d0d0;
+        }
+
+        .like {
+            float: left;
+            text-decoration: none;
+        }
+
+        .comment {
+            float: right;
+            text-decoration: none;
+        }
+
+        p::selection {
+            color: green;
+            background-color: #d0d0d0;
+        }
+
+        @media (max-width: 1000px) {
+            #right-column {
+                display: none;
+            }
+
+            #content-column {
+                margin-right: 0;
+                float: right;
+                width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #main-container {
+                display: flex;
+                flex-flow: wrap;
+            }
+
+            #left-column {
+                order: 0;
+                float: none;
+                width: 400px;
+                clear: both;
+                margin: auto;
+                margin-bottom: 1em;
+            }
+
+            #content-wrapper {
+                order: 1;
+            }
+
+            #footer {
+                order: 2;
+                width: 100%;
+            }
+
+            #content-column {
+                width: 100%;
+            }
+
+            #nav {
+                margin: auto;
+                text-align: center;
+            }
+
+                #nav > a {
+                    padding: 0.5em;
+                    display: inline-block;
+                    width: auto;
+                }
+        }
     </style>
 </head>
 <body>
